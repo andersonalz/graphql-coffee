@@ -15,7 +15,7 @@ export class CoffeesResolver {
         description: "return One Coffee",
         nullable: true
     })
-    async findOne(@Args('id', { type: () => ID }) id: string) {
+    async findOne(@Args('id', { type: () => ID }) id: number) {
         return null
     }
 

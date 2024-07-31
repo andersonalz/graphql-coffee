@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type Coffee {
-  id: String!
+  id: ID!
   name: String!
   brand: String!
   flavors: [String!]!
@@ -24,4 +24,10 @@ type Mutation {
 input CreateCoffeeInput {
   """Coffee name"""
   name: String!
+
+  """Coffee brand"""
+  brand: String!
+
+  """Coffee flavors"""
+  flavors: [String!]!
 }
