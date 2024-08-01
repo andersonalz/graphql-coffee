@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateCoffeeInput } from './dto/coffee.dto';
+import { CreateCoffeeInput } from './dto/coffee-create.dto';
 import { Coffee } from './entities/coffee.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserInputError } from 'apollo-server-express';
-import { UpdateCoffeeInput } from './dto/update.coffee.dto';
+import { UpdateCoffeeInput } from './dto/coffee-update.dto';
 
 @Injectable()
 //with mock data
@@ -44,7 +44,7 @@ export class CoffeesService {
     }
 
     async findOne(id: number) {
-        const coffee =  await this.coffeeRepository.findOne({
+        const coffee = await this.coffeeRepository.findOne({
             where: {
                 id: id
             }
@@ -53,7 +53,7 @@ export class CoffeesService {
         if (!coffee) {
             throw new UserInputError(`Coffee #${id} not found`);
         }
-        
+
         return coffee;
     }
 
@@ -68,12 +68,12 @@ export class CoffeesService {
             ...updateCoffeeInput
         })
 
-        if(!updateCoffee){
+        if (!updateCoffee) {
             throw new UserInputError(`Coffee #${id} not found`);
         }
         return updateCoffee
     }
-    
+
     async delete(id: number) {
         const coffee = await this.coffeeRepository.findOne({
             where: {
