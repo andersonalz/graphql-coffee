@@ -2,6 +2,7 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+"""Coffee Model"""
 type Coffee {
   id: ID!
   name: String!
@@ -17,7 +18,9 @@ type Query {
 }
 
 type Mutation {
-  createCoffee(createCoffeeInput: CreateCoffeeInput!): Coffee
+  createCoffee(createCoffeeInput: CreateCoffeeInput!): Coffee!
+  updateCoffee(id: Float!, updateCoffeeInput: UpdateCoffeeInput!): Coffee!
+  deleteCoffee(id: Float!): Coffee!
 }
 
 """Create Coffee Input type object"""
@@ -30,4 +33,16 @@ input CreateCoffeeInput {
 
   """Coffee flavors"""
   flavors: [String!]!
+}
+
+"""update Coffee Input type object"""
+input UpdateCoffeeInput {
+  """Coffee name"""
+  name: String
+
+  """Coffee brand"""
+  brand: String
+
+  """Coffee flavors"""
+  flavors: [String!]
 }
