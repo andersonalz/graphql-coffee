@@ -1,4 +1,5 @@
 import { Field, InputType, ObjectType } from "@nestjs/graphql";
+import { Flavor } from "../entities/flavor.entity";
 
 @ObjectType({ isAbstract: true })
 @InputType({
@@ -8,8 +9,10 @@ import { Field, InputType, ObjectType } from "@nestjs/graphql";
 export class CreateCoffeeInput {
     @Field({ description: 'Coffee name' })
     name: string;
+    
     @Field({ description: 'Coffee brand' })
     brand: string;
+    
     @Field(() => [String] ,{description: 'Coffee flavors'})
-    flavors: string[];
+    flavors: String[];
 }

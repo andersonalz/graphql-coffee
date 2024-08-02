@@ -39,5 +39,6 @@ export class CoffeesResolver {
     async delete(@Args('id', ParseIntPipe) id: number) {
         return this.coffeesService.delete(id)
     }
+
 }
 
