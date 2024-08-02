@@ -83,7 +83,6 @@ export class CoffeesService {
             ...updateCoffeeInput,
             flavors,
         })
-
         if (!updateCoffee) {
             throw new UserInputError(`Coffee #${id} not found`);
         }
