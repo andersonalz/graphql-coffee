@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql";
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Coffee } from "./coffee.entity";
 
 @ObjectType()
@@ -15,4 +15,7 @@ export class Flavor {
     @JoinTable()
     @ManyToMany((type) => Coffee , coffee => coffee.flavors)
     coffees: Coffee[];
+
+    @CreateDateColumn()
+    createdAt?: Date;
 }

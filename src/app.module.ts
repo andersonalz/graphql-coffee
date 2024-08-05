@@ -6,6 +6,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { CoffeesModule } from './coffees/coffees.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { DateScalar } from './common/scalars/date.scalar/date.scalar';
 
 @Module({
   imports: [
@@ -17,18 +18,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: "postgres",
       password: "pass1234",
       database: "postgres-graph-ql",
-      autoLoadEntities: true, 
+      autoLoadEntities: true,
       synchronize: true,
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
-    driver: ApolloDriver,
-    autoSchemaFile: join(process.cwd(),'src/schema.gql'),
-    // buildSchemaOptions : {
-    //   numberScalarMode: 'integer',
-    // }
-  }), 
+      driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      // buildSchemaOptions : {
+      //   numberScalarMode: 'integer',
+      //   dateScalarMode: 'timestamp',
+      // }
+    }),
     CoffeesModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService , DateScalar],
 })
 export class AppModule { }
