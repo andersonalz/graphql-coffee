@@ -7,6 +7,11 @@ import { join } from 'path';
 import { CoffeesModule } from './coffees/coffees.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DateScalar } from './common/scalars/date.scalar/date.scalar';
+import { Tea } from './teas/entities/tea.entity/tea.entity';
+import { DrinksResolver } from './drinks/drinks.resolver';
+import { TeasResolver } from './teas/teas.resolver';
+import { TeasModule } from './teas/teas.module';
+import { DrinksModule } from './drinks/drinks.module';
 
 @Module({
   imports: [
@@ -24,12 +29,15 @@ import { DateScalar } from './common/scalars/date.scalar/date.scalar';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      // buildSchemaOptions : {
+      buildSchemaOptions : {
+        orphanedTypes: [Tea] //when we have a type that is not referenced to any resolver, query , mutation we need to tell graphql to include this type in the schema
       //   numberScalarMode: 'integer',
       //   dateScalarMode: 'timestamp',
-      // }
+      }
     }),
-    CoffeesModule],
+    CoffeesModule,
+    TeasModule,
+    DrinksModule],
   controllers: [AppController],
   providers: [AppService , DateScalar],
 })

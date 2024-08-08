@@ -10,23 +10,47 @@ type Flavor {
 }
 
 """Coffee Model"""
-type Coffee {
-  id: ID!
+type Coffee implements Drink {
   name: String!
+  id: ID!
   brand: String!
   flavors: [Flavor!]!
   createdAt: Date
+}
+
+interface Drink {
+  name: String!
+}
+
+"""Tea"""
+type Tea implements Drink {
+  name: String!
+  brand: String!
+  weight: Float!
 }
 
 """Date custom scalar type"""
 scalar Date
 
 type Query {
+  """return All Coffees"""
   coffees: [Coffee!]!
 
   """return One Coffee"""
   coffee(id: ID!): Coffee
+
+  """return all teas"""
+  teas: [Tea!]!
+
+  """return one tea"""
+  tea: Tea!
+
+  """Get all drinks"""
+  drinks: [DrinkResult!]!
 }
+
+"""union type for Coffee and Tea"""
+union DrinkResult = Coffee | Tea
 
 type Mutation {
   createCoffee(createCoffeeInput: CreateCoffeeInput!): Coffee!

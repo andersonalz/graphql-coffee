@@ -13,6 +13,8 @@ export class CreateCoffeeInput {
     @Field({ description: 'Coffee brand' })
     brand: string;
     
+    coffeeType?: string;
+
     @Field(() => [String] ,{description: 'Coffee flavors'})
     flavors: String[];
 }

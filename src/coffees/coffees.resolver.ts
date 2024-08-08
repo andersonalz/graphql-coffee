@@ -9,9 +9,9 @@ import { ParseIntPipe } from '@nestjs/common';
 export class CoffeesResolver {
     constructor(
         private readonly coffeesService: CoffeesService
-    ) { }
+    ) {}
 
-    @Query(() => [Coffee], { name: 'coffees' })
+    @Query(() => [Coffee], { name: 'coffees', description: "return All Coffees" })
     async findAll() {
         return this.coffeesService.findAll()
     }
